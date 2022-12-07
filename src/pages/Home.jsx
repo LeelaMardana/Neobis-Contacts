@@ -102,18 +102,11 @@ const contacts = [
   },
 ];
 
-const ContainerStyled = styled.main`
-  max-width: 1155px;
-  margin: 0 auto;
-  padding: 10px;
+const SectionStyled = styled.section`
+  padding: 50px 0 100px;
 `;
 
-const SectionStyled = styled.section`
-  padding: 100px 0;
-  width: 100%;
-`;
 const WrapperStyled = styled.div`
-  padding: 100px 0;
   width: 100%;
   display: grid;
   grid-template-columns: repeat(4, 250px);
@@ -123,14 +116,12 @@ const WrapperStyled = styled.div`
 
 export const Home = () => {
   return (
-    <ContainerStyled>
-      <SectionStyled>
-        <WrapperStyled>
-          {contacts.map(item => (
-            <Card key={item.id} {...item} />
-          ))}
-        </WrapperStyled>
-      </SectionStyled>
-    </ContainerStyled>
+    <SectionStyled>
+      <WrapperStyled>
+        {contacts.map(item => (
+          <Card key={item.id} {...item} />
+        ))}
+      </WrapperStyled>
+    </SectionStyled>
   );
 };

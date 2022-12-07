@@ -1,7 +1,10 @@
 import React from 'react';
-import { Home } from './pages/Home';
+import styled from 'styled-components';
 import { createGlobalStyle } from 'styled-components';
-// import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { Header } from './components/Header';
+import { Home } from './pages/Home';
+import { Contact } from './pages/Contact';
 
 const GlobalStyle = createGlobalStyle`
 *,
@@ -55,13 +58,30 @@ a {
   color: inherit;
   transition: color 0.2s;
 }
+body{
+  font-family: Ubuntu;
+}
+`;
+
+const Main = styled.main`
+  max-width: 1155px;
+  margin: 0 auto;
+  padding: 0 10px;
 `;
 
 function App() {
   return (
     <>
       <GlobalStyle />
-      <Home />
+      <Router>
+        <Header />
+        <Main>
+          <Routes>
+            <Route index element={<Home />} />
+            <Route path='/contacts/:id' element={<Contact />} />
+          </Routes>
+        </Main>
+      </Router>
     </>
   );
 }

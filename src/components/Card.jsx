@@ -131,10 +131,7 @@ export const Card = ({
         </InfoStyled>
 
         <BtnStyled>
-          {/* <Link to={`/details/${id}`}>
-            show
-          </Link> */}
-          show
+          <Link to={`/contacts/${id}`}>show</Link>
         </BtnStyled>
       </ContentStyled>
     </CardStyled>
