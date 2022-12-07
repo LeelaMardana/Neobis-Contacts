@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { Card } from '../../components/Card';
+import { Card } from '../components/Card';
 // import { useDispatch } from 'react-redux';
 
 const contacts = [
