@@ -1,9 +1,13 @@
 import styled from 'styled-components';
 import { Card } from '../components/Card';
-// import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
-import React, { useEffect, useState } from 'react';
-import { getData } from '../api';
+import React, { useEffect } from 'react';
+import {
+  loadCountacts,
+  selectAllContacts,
+  selectCountactsStatus,
+} from '../features/contacts-slice';
 
 const SectionStyled = styled.section`
   padding: 50px 0 100px;
@@ -16,22 +20,24 @@ const WrapperStyled = styled.div`
   justify-content: space-between;
   row-gap: 41px;
 `;
-
 export const HomePage = () => {
-  const [contacts, setContacts] = useState([]);
+  const dispatch = useDispatch();
+  const contacts = useSelector(state => selectAllContacts(state));
+  const { status, error, qty } = useSelector(selectCountactsStatus);
 
   useEffect(() => {
-    getData().then(data => {
-      setContacts(data);
-    });
-  }, []);
+    if (!qty) {
+      dispatch(loadCountacts());
+    }
+  }, [qty, dispatch]);
 
   return (
     <SectionStyled>
       <WrapperStyled>
-        {contacts.map(item => (
-          <Card key={item.id} {...item} />
-        ))}
+        {error && <h2>Can't fetch data</h2>}
+        {status === 'loading' && <h2>Loading...</h2>}
+        {status === 'received' &&
+          contacts.map(item => <Card key={item.id} {...item} />)}
       </WrapperStyled>
     </SectionStyled>
   );
