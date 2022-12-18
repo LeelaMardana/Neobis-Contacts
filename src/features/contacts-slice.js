@@ -11,12 +11,17 @@ const initialState = {
   status: 'idle',
   error: null,
   list: [],
+  detailsID: 0,
 };
 
 const contactsSlice = createSlice({
   name: '@@contacts',
   initialState,
-  reducers: {},
+  reducers: {
+    setDetails: (state, action) => {
+      state.detailsID = action.payload;
+    },
+  },
   extraReducers: builder => {
     builder
       .addCase(loadCountacts.pending, state => {
@@ -34,6 +39,7 @@ const contactsSlice = createSlice({
   },
 });
 
+export const { setDetails } = contactsSlice.actions;
 export const contactsReducer = contactsSlice.reducer;
 
 // Selects
@@ -43,3 +49,8 @@ export const selectCountactsStatus = state => ({
   error: state.contacts.error,
   qty: state.contacts.list.length,
 });
+
+export const selectContact = state =>
+  state.contacts.list.filter(
+    contact => contact.id === state.contacts.detailsID
+  );

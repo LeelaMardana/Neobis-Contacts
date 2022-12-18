@@ -69,7 +69,6 @@ export const CustomForm = ({
   website,
 }) => {
   const [data, setData] = useState({});
-  console.log(data);
   return (
     <Formik
       initialValues={{

@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { createGlobalStyle } from 'styled-components';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import { Header } from './components/Header';
 import { HomePage } from './pages/HomePage';
 import { Details } from './pages/Details';
@@ -73,15 +73,13 @@ function App() {
   return (
     <>
       <GlobalStyle />
-      <Router>
-        <Header />
-        <Main>
-          <Routes>
-            <Route index element={<HomePage />} />
-            <Route path='/contacts/:id' element={<Details />} />
-          </Routes>
-        </Main>
-      </Router>
+      <Header />
+      <Main>
+        <Routes>
+          <Route index element={<HomePage />} />
+          <Route path='/contacts/:id' element={<Details />} />
+        </Routes>
+      </Main>
     </>
   );
 }
