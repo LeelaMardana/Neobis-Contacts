@@ -1,8 +1,9 @@
 import styled from 'styled-components';
 import { Card } from '../components/Card';
 // import { useDispatch } from 'react-redux';
-import { getData } from '../features/api';
+
 import React, { useEffect, useState } from 'react';
+import { getData } from '../api';
 
 const SectionStyled = styled.section`
   padding: 50px 0 100px;
@@ -16,7 +17,7 @@ const WrapperStyled = styled.div`
   row-gap: 41px;
 `;
 
-export const Home = () => {
+export const HomePage = () => {
   const [contacts, setContacts] = useState([]);
 
   useEffect(() => {

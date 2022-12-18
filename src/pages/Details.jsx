@@ -1,7 +1,7 @@
 // import Form from '../../components/Form';
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
-import { CustomForm } from './../components/Form';
+import { CustomForm } from '../components/Form';
 // import { useParams } from 'react-router-dom';
 // import { useSelector } from 'react-redux';
 // import { useState } from 'react';
@@ -39,7 +39,7 @@ const ContactStyled = styled.div`
   }
 `;
 
-export const Contact = () => {
+export const Details = () => {
   return (
     <SectionStyled>
       <ContactStyled>

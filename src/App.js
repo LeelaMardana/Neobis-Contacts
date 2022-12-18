@@ -3,8 +3,8 @@ import styled from 'styled-components';
 import { createGlobalStyle } from 'styled-components';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Header } from './components/Header';
-import { Home } from './pages/Home';
-import { Contact } from './pages/Contact';
+import { HomePage } from './pages/HomePage';
+import { Details } from './pages/Details';
 
 const GlobalStyle = createGlobalStyle`
 *,
@@ -77,8 +77,8 @@ function App() {
         <Header />
         <Main>
           <Routes>
-            <Route index element={<Home />} />
-            <Route path='/contacts/:id' element={<Contact />} />
+            <Route index element={<HomePage />} />
+            <Route path='/contacts/:id' element={<Details />} />
           </Routes>
         </Main>
       </Router>
