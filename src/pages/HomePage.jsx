@@ -19,7 +19,6 @@ export const HomePage = () => {
   const dispatch = useDispatch();
   const { status, error, list } = useSelector(selectContacts);
 
-  console.log(list);
   useEffect(() => {
     dispatch(getContacts());
   }, [dispatch]);
