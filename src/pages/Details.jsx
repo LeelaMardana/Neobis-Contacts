@@ -1,26 +1,23 @@
 // import Form from '../../components/Form';
 import React from 'react';
-import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { CustomForm } from '../components/Form';
 // import { useParams } from 'react-router-dom';
 // import { useSelector } from 'react-redux';
 // import { useState } from 'react';
 
-import { selectContact } from './../features/contacts-slice';
-
-// const data = {
-//   id: 1,
-//   firstName: 'Vanessa',
-//   lastName: 'Fahrmann',
-//   city: 'Bishkek',
-//   country: 'Kyrgyzstan',
-//   phoneNumber: '+99621509322',
-//   email: 'vanessa.f@gomail.com',
-//   website: 'vanessa.fm',
-//   image:
-//     'https://images.unsplash.com/photo-1565260524775-7e9b536fba2f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80',
-// };
+const data = {
+  id: 1,
+  firstName: 'Vanessa',
+  lastName: 'Fahrmann',
+  city: 'Bishkek',
+  country: 'Kyrgyzstan',
+  phoneNumber: '+99621509322',
+  email: 'vanessa.f@gomail.com',
+  website: 'vanessa.fm',
+  image:
+    'https://images.unsplash.com/photo-1565260524775-7e9b536fba2f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80',
+};
 
 const SectionStyled = styled.section`
   padding: 50px 0 100px;
@@ -43,8 +40,6 @@ const ContactStyled = styled.div`
 `;
 
 export const Details = () => {
-  const com = useSelector(state => selectContact(state));
-  const data = com[0];
   console.log(data);
   return (
     <SectionStyled>

@@ -40,7 +40,7 @@ export const contactsReducer = contactsSlice.reducer;
 
 // Selects
 export const selectAllContacts = state => state.contacts.list;
-export const selectCountactsStatus = state => ({
+export const selectContactsStatus = state => ({
   status: state.contacts.status,
   error: state.contacts.error,
   qty: state.contacts.list.length,

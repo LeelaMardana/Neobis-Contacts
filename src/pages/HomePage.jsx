@@ -6,7 +6,7 @@ import React, { useEffect } from 'react';
 import {
   loadCountacts,
   selectAllContacts,
-  selectCountactsStatus,
+  selectContactsStatus,
 } from '../features/contacts-slice';
 
 const SectionStyled = styled.section`
@@ -23,7 +23,7 @@ const WrapperStyled = styled.div`
 export const HomePage = () => {
   const dispatch = useDispatch();
   const contacts = useSelector(state => selectAllContacts(state));
-  const { status, error, qty } = useSelector(selectCountactsStatus);
+  const { status, error, qty } = useSelector(selectContactsStatus);
 
   useEffect(() => {
     if (!qty) {
