@@ -12,12 +12,9 @@ export const getContacts = createAsyncThunk(
   async (_, err) => {
     try {
       const data = JSON.parse(localStorage.getItem('contacts'));
-      if (data) {
-        return data;
-      } else {
-        localStorage.setItem('contacts', JSON.stringify(await getUsers()));
-        return JSON.parse(localStorage.getItem('contacts'));
-      }
+      if (data) return data;
+      localStorage.setItem('contacts', JSON.stringify(await getUsers()));
+      return JSON.parse(localStorage.getItem('contacts'));
     } catch (error) {
       const message =
         (error.response &&
