@@ -1,8 +1,6 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import { setDetails } from '../features/contacts-slice';
 
 const CardStyled = styled.div`
   display: flex;
@@ -88,7 +86,6 @@ export const Card = ({
   website,
 }) => {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
 
   return (
     <CardStyled>
@@ -138,7 +135,6 @@ export const Card = ({
         <BtnStyled
           onClick={() => {
             navigate(`/contacts/${id}`);
-            dispatch(setDetails(id));
           }}
         >
           show

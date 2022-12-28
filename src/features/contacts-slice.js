@@ -1,47 +1,55 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-
-export const loadCountacts = createAsyncThunk(
-  '@@contacts/load-contacts',
-  (_, { extra: { client, api } }) => {
-    return client.get(api.ALL_COUNTACTS);
-  }
-);
+import { getUsers } from '../api';
 
 const initialState = {
   status: 'idle',
   error: null,
   list: [],
-  detailsID: 0,
 };
 
+export const getContacts = createAsyncThunk(
+  '@@get/contacts',
+  async (_, err) => {
+    try {
+      return await getUsers();
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return err.rejectWithValue(message);
+    }
+  }
+);
+
 const contactsSlice = createSlice({
-  name: '@@contacts',
+  name: '@@get',
   initialState,
   reducers: {},
   extraReducers: builder => {
     builder
-      .addCase(loadCountacts.pending, state => {
+      .addCase(getContacts.pending, state => {
         state.status = 'loading';
         state.error = null;
       })
-      .addCase(loadCountacts.rejected, (state, action) => {
+      .addCase(getContacts.rejected, (state, action) => {
         state.status = 'rejected';
         state.error = action.payload || action.meta.error;
       })
-      .addCase(loadCountacts.fulfilled, (state, action) => {
+      .addCase(getContacts.fulfilled, (state, action) => {
         state.status = 'received';
-        state.list = action.payload.data.data;
+        state.list = action.payload.data;
       });
   },
 });
 
-export const { setDetails } = contactsSlice.actions;
 export const contactsReducer = contactsSlice.reducer;
 
 // Selects
-export const selectAllContacts = state => state.contacts.list;
-export const selectContactsStatus = state => ({
+export const selectContacts = state => ({
   status: state.contacts.status,
   error: state.contacts.error,
-  qty: state.contacts.list.length,
+  list: state.contacts.list,
 });
