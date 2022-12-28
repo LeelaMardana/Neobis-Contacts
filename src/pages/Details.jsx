@@ -1,5 +1,5 @@
 // import Form from '../../components/Form';
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { CustomForm } from '../components/Form';
