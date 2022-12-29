@@ -5,19 +5,6 @@ import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getContacts, selectContacts } from '../features/contacts-slice';
 
-// const data = {
-//   id: 1,
-//   firstName: 'Vanessa',
-//   lastName: 'Fahrmann',
-//   city: 'Bishkek',
-//   country: 'Kyrgyzstan',
-//   phoneNumber: '+99621509322',
-//   email: 'vanessa.f@gomail.com',
-//   website: 'vanessa.fm',
-//   image:
-//     'https://images.unsplash.com/photo-1565260524775-7e9b536fba2f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80',
-// };
-
 const SectionStyled = styled.section`
   padding: 50px 0 100px;
 `;

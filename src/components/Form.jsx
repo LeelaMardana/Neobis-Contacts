@@ -1,9 +1,9 @@
 import { Formik, Form, useField } from 'formik';
-import { useState } from 'react';
-// import { useDispatch } from 'react-redux';
-// import { editContact } from '../../redux/contactsSlice';
 import * as Yup from 'yup';
 import styled from 'styled-components';
+import { updateContact } from '../features/contacts-slice';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 const FormStyled = styled(Form)`
   width: 100%;
@@ -67,24 +67,28 @@ export const CustomForm = ({
   lastName,
   phoneNumber,
   website,
+  image,
 }) => {
-  const [data, setData] = useState({});
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   return (
     <Formik
       initialValues={{
-        firstname: firstName,
-        lastname: lastName,
-        city: city,
-        country: country,
-        phone: phoneNumber,
-        email: email,
-        website: website,
+        id,
+        firstName,
+        lastName,
+        city,
+        country,
+        phoneNumber,
+        email,
+        website,
+        image,
       }}
       validationSchema={Yup.object({
-        firstname: Yup.string()
+        firstName: Yup.string()
           .min(2, 'Минимум 2 символа.')
           .required('Пожалуйста, заполните это поле.'),
-        lastname: Yup.string()
+        lastName: Yup.string()
           .min(2, 'Минимум 2 символа.')
           .required('Пожалуйста, заполните это поле.'),
         city: Yup.string()
@@ -93,7 +97,7 @@ export const CustomForm = ({
         country: Yup.string()
           .min(2, 'Минимум 2 символа.')
           .required('Пожалуйста, заполните это поле.'),
-        phone: Yup.string()
+        phoneNumber: Yup.string()
           .matches(
             /^(\+?\d{0,4})?\s?-?\s?(\(?\d{3}\)?)\s?-?\s?(\(?\d{3}\)?)\s?-?\s?(\(?\d{4}\)?)?$/,
             'Недействительный номер телефона.'
@@ -112,15 +116,16 @@ export const CustomForm = ({
           .required('Пожалуйста, заполните это поле.'),
       })}
       onSubmit={values => {
-        setData(values);
+        dispatch(updateContact(values));
+        navigate(-1);
       }}
     >
       <FormStyled className='form'>
         <div>
           <MyTextInput
             label='First name:'
-            id='firstname'
-            name='firstname'
+            id='firstName'
+            name='firstName'
             type='text'
           />
         </div>
@@ -128,8 +133,8 @@ export const CustomForm = ({
         <div>
           <MyTextInput
             label='Last name:'
-            id='lastname'
-            name='lastname'
+            id='lastName'
+            name='lastName'
             type='text'
           />
         </div>
@@ -150,8 +155,8 @@ export const CustomForm = ({
         <div>
           <MyTextInput
             label='Phone Number:'
-            id='phone'
-            name='phone'
+            id='phoneNumber'
+            name='phoneNumber'
             type='text'
           />
         </div>
