@@ -1,8 +1,7 @@
 import { Formik, Form, useField } from 'formik';
 import * as Yup from 'yup';
 import styled from 'styled-components';
-import { updateContact } from '../features/contacts-slice';
-import { useDispatch } from 'react-redux';
+import { updateContact } from '../features/updateContact';
 import { useNavigate } from 'react-router-dom';
 
 const FormStyled = styled(Form)`
@@ -69,7 +68,6 @@ export const CustomForm = ({
   website,
   image,
 }) => {
-  const dispatch = useDispatch();
   const navigate = useNavigate();
   return (
     <Formik
@@ -116,7 +114,7 @@ export const CustomForm = ({
           .required('Пожалуйста, заполните это поле.'),
       })}
       onSubmit={values => {
-        dispatch(updateContact(values));
+        updateContact(values);
         navigate(-1);
       }}
     >

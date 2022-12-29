@@ -30,18 +30,7 @@ export const getContacts = createAsyncThunk(
 const contactsSlice = createSlice({
   name: '@@get',
   initialState,
-  reducers: {
-    updateContact: (_, action) => {
-      const data = JSON.parse(localStorage.getItem('contacts'));
-      const list = data.map(item => {
-        if (item.id === action.payload.id) {
-          return action.payload;
-        }
-        return item;
-      });
-      localStorage.setItem('contacts', JSON.stringify(list));
-    },
-  },
+  reducers: {},
   extraReducers: builder => {
     builder
       .addCase(getContacts.pending, state => {
@@ -60,7 +49,6 @@ const contactsSlice = createSlice({
 });
 
 export const contactsReducer = contactsSlice.reducer;
-export const { updateContact } = contactsSlice.actions;
 
 // Selects
 export const selectContacts = state => ({
