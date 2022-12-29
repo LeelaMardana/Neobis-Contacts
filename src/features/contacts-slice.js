@@ -13,7 +13,15 @@ export const getContacts = createAsyncThunk(
     try {
       const data = JSON.parse(localStorage.getItem('contacts'));
       if (data) return data;
-      localStorage.setItem('contacts', JSON.stringify(await getUsers()));
+
+      const defaultValues = await getUsers();
+      const newValues = defaultValues.map(item => ({
+        ...item,
+        isLiked: false,
+      }));
+
+      localStorage.setItem('contacts', JSON.stringify(newValues));
+
       return JSON.parse(localStorage.getItem('contacts'));
     } catch (error) {
       const message =
