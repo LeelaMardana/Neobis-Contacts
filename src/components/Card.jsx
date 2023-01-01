@@ -1,5 +1,4 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -102,7 +101,6 @@ export const Card = ({
     isLiked,
   };
   const navigate = useNavigate();
-  const dispatch = useDispatch();
 
   return (
     <CardStyled>
