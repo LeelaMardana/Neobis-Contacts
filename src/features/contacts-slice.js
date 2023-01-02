@@ -44,6 +44,13 @@ const contactsSlice = createSlice({
 
       localStorage.setItem('contacts', JSON.stringify(state.list));
     },
+    updateContact: (state, action) => {
+      const isLiked = state.list[action.payload.id - 1].isLiked;
+      const newContact = { ...action.payload, isLiked };
+      state.list[action.payload.id - 1] = newContact;
+
+      localStorage.setItem('contacts', JSON.stringify(state.list));
+    },
   },
   extraReducers: builder => {
     builder
@@ -64,11 +71,18 @@ const contactsSlice = createSlice({
 
 export const contactsReducer = contactsSlice.reducer;
 
-export const { likeContact } = contactsSlice.actions;
+export const { likeContact, updateContact } = contactsSlice.actions;
 
 // Selects
+
 export const selectContacts = state => ({
   status: state.contacts.status,
   error: state.contacts.error,
   list: state.contacts.list,
 });
+
+export const selectVisibleContacts = (state, { search = '' }) => {
+  return state.contacts.list.filter(contact =>
+    contact.firstName.toLowerCase().includes(search.toLowerCase())
+  );
+};

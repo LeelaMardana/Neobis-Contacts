@@ -2,10 +2,16 @@ import styled from 'styled-components';
 import { Card } from '../components/Card';
 import { useDispatch, useSelector } from 'react-redux';
 import React, { useEffect } from 'react';
-import { getContacts, selectContacts } from '../features/contacts-slice';
+import {
+  getContacts,
+  selectContacts,
+  selectVisibleContacts,
+} from '../features/contacts-slice';
+import { Controls } from '../components/Controls';
+import { selectControls } from '../features/controls-slice';
 
 const SectionStyled = styled.section`
-  padding: 50px 0 100px;
+  padding-bottom: 100px;
 `;
 
 const WrapperStyled = styled.div`
@@ -17,7 +23,9 @@ const WrapperStyled = styled.div`
 `;
 export const HomePage = () => {
   const dispatch = useDispatch();
-  const { status, error, list } = useSelector(selectContacts);
+  const controls = useSelector(selectControls);
+  const contacts = useSelector(state => selectVisibleContacts(state, controls));
+  const { status, error } = useSelector(selectContacts);
 
   useEffect(() => {
     dispatch(getContacts());
@@ -25,11 +33,12 @@ export const HomePage = () => {
 
   return (
     <SectionStyled>
+      <Controls />
       <WrapperStyled>
         {error && <h2>Can't fetch data</h2>}
         {status === 'loading' && <h2>Loading...</h2>}
         {status === 'received' &&
-          list.map(item => <Card key={item.id} {...item} />)}
+          contacts.map(item => <Card key={item.id} {...item} />)}
       </WrapperStyled>
     </SectionStyled>
   );
