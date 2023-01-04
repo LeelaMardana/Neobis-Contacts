@@ -27,9 +27,5 @@ export const Search = () => {
   const handleSearch = e => {
     dispatch(setSearch(e.target.value));
   };
-  return (
-    <label>
-      <Input onChange={handleSearch} value={search} />
-    </label>
-  );
+  return <Input onChange={handleSearch} value={search} />;
 };
