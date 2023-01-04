@@ -5,7 +5,8 @@ import React, { useEffect } from 'react';
 import {
   getContacts,
   selectContacts,
-  selectVisibleContacts,
+  selectFilter,
+  selectSearch,
 } from '../features/contacts-slice';
 import { Controls } from '../components/Controls';
 import { selectControls } from '../features/controls-slice';
@@ -24,8 +25,10 @@ const WrapperStyled = styled.div`
 export const HomePage = () => {
   const dispatch = useDispatch();
   const controls = useSelector(selectControls);
-  const contacts = useSelector(state => selectVisibleContacts(state, controls));
+  const contacts = useSelector(state => selectSearch(state, controls));
   const { status, error } = useSelector(selectContacts);
+  const filterValue = useSelector(state => state.controls.filter);
+  const filterContacts = selectFilter(contacts, filterValue);
 
   useEffect(() => {
     dispatch(getContacts());
@@ -38,7 +41,7 @@ export const HomePage = () => {
         {error && <h2>Can't fetch data</h2>}
         {status === 'loading' && <h2>Loading...</h2>}
         {status === 'received' &&
-          contacts.map(item => <Card key={item.id} {...item} />)}
+          filterContacts.map(item => <Card key={item.id} {...item} />)}
       </WrapperStyled>
     </SectionStyled>
   );

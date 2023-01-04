@@ -81,8 +81,25 @@ export const selectContacts = state => ({
   list: state.contacts.list,
 });
 
-export const selectVisibleContacts = (state, { search = '' }) => {
+export const selectSearch = (state, { search = '' }) => {
   return state.contacts.list.filter(contact =>
     contact.firstName.toLowerCase().includes(search.toLowerCase())
   );
+};
+
+export const selectFilter = (list = [], value) => {
+  switch (value) {
+    case 'sortA-Z': {
+      return list;
+    }
+    case 'sortZ-A': {
+      return list;
+    }
+    case 'liked': {
+      return list.filter(todo => todo.isLiked);
+    }
+    default: {
+      return list;
+    }
+  }
 };

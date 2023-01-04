@@ -1,5 +1,7 @@
+import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import { Search } from './Search';
+import { setFilter } from './../features/controls-slice';
 
 const Wrapper = styled.div`
   display: flex;
@@ -22,18 +24,21 @@ const Filter = styled.button`
 `;
 
 export const Controls = () => {
+  const dispatch = useDispatch();
+  const handleFilter = value => dispatch(setFilter(value));
+
   return (
     <Wrapper>
       <Search />
       <FilterWrap>
-        <Filter>
-          <img src='./img/favorites-icon.svg' alt='12' />
+        <Filter onClick={() => handleFilter('liked')}>
+          <img src='./img/favorites-icon.svg' alt='liked' />
         </Filter>
-        <Filter>
-          <img src='./img/sortA.svg' alt='12' />
+        <Filter onClick={() => handleFilter('sortA-Z')}>
+          <img src='./img/sortA.svg' alt='sortA-Z' />
         </Filter>
-        <Filter>
-          <img src='./img/sortZ.svg' alt='12' />
+        <Filter onClick={() => handleFilter('sortZ-A')}>
+          <img src='./img/sortZ.svg' alt='sortZ-A' />
         </Filter>
       </FilterWrap>
     </Wrapper>
