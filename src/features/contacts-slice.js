@@ -90,9 +90,25 @@ export const selectSearch = (state, { search = '' }) => {
 export const selectFilter = (list = [], value) => {
   switch (value) {
     case 'sortA-Z': {
+      list.sort((a, b) => {
+        const nameA = a.firstName.toLowerCase();
+        const nameB = b.firstName.toLowerCase();
+        if (nameA < nameB) return -1;
+        if (nameA > nameB) return 1;
+        return 0;
+      });
+
       return list;
     }
     case 'sortZ-A': {
+      list.sort((a, b) => {
+        const nameA = a.firstName.toLowerCase();
+        const nameB = b.firstName.toLowerCase();
+        if (nameA < nameB) return 1;
+        if (nameA > nameB) return -1;
+        return 0;
+      });
+
       return list;
     }
     case 'liked': {
